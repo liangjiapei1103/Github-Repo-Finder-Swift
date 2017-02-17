@@ -64,8 +64,8 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if filteredRepos != nil {
-            return filteredRepos.count
+        if repos != nil {
+            return repos.count
         } else {
             return 0
         }
@@ -75,7 +75,7 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell", for: indexPath) as! RepoTableViewCell
         
-        cell.repo = filteredRepos[indexPath.row]
+        cell.repo = repos[indexPath.row]
         
         return cell;
         
