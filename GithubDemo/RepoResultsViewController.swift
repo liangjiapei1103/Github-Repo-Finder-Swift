@@ -18,8 +18,6 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
     var searchSettings = GithubRepoSearchSettings()
 
     var repos: [GithubRepo]!
-    
-    var filteredRepos: [GithubRepo]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +49,6 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
         GithubRepo.fetchRepos(searchSettings, successCallback: { (newRepos) -> Void in
 
             self.repos = newRepos
-            self.filteredRepos = newRepos
             
             // Print the returned repositories to the output window
             for repo in newRepos {
