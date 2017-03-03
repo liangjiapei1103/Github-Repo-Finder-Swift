@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 // Main ViewController
-class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SettingsPresentingViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -58,7 +58,7 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
             self.tableView.reloadData()
 
             MBProgressHUD.hide(for: self.view, animated: true)
-            }, error: { (error) -> Void in
+        }, error: { (error) -> Void in
                 print(error)
         })
     }
@@ -79,6 +79,22 @@ class RepoResultsViewController: UIViewController, UITableViewDelegate, UITableV
         
         return cell;
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navController = segue.destination as! UINavigationController
+        let vc = navController.topViewController as! SearchSettingsViewController
+        vc.settings = searchSettings
+        vc.delegate = self
+    }
+    
+    func didCancelSettings() {
+
+    }
+    
+    func didSaveSettings(settings: GithubRepoSearchSettings) {
+        searchSettings = settings
+        doSearch()
     }
     
 }
